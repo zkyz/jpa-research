@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.knia.reply.system.index.dao.IndexDao">
+	<select id="getHelp" resultType="String">
+    SELECT CONTENT
+      FROM REPLY_HELP
+     WHERE ID = #{0}
+	</select>
+
+	<update id="saveHelp">
+    MERGE
+     INTO REPLY_HELP
+    USING ( SELECT 1 FROM DUAL )
+       ON ( ID = #{0} )
+     WHEN MATCHED THEN
+   UPDATE
+      SET CONTENT = #{1}
+     WHEN NOT MATCHED THEN
+   INSERT (ID, CONTENT)
+   VALUES (#{0}, #{1})
+	</update>
+</mapper>

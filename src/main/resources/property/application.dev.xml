@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment><![CDATA[
+		기본 설정
+	]]></comment>
+
+	<entry key="application.title">손해보험협회</entry>
+	<entry key="application.base.package">kr.or.knia</entry>
+	<entry key="application.file.storage">/was_t_app/was_c_fs/reply</entry>
+
+   	<entry key="database.url">jdbc:oracle:thin:reply/reply$8500@172.100.30.22:1590:ORA11T</entry>
+</properties>

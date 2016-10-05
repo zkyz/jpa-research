@@ -1,0 +1,64 @@
+<div class="header">
+	<form class="search container" data-bind="statistics" style="padding:15px">
+		<div class="row">
+			<div class="col-md-3">
+				<input id="date-range" class="form-control" style="width:200px">
+			</div>
+			<div class="col-md-2">
+				<select class="form-control" ng-model="groupHead" ng-change="getGroups()">
+					<option value="">모두</option>
+					<option ng-repeat="i in groupsHead" value="{{i.id}}">{{i.name}}</option>
+				</select>
+			</div>
+			<div class="col-md-4">
+				<select name="group" class="form-control">
+					<option value="" id="emptyGroup"></option>
+					<option ng-repeat="i in groupsChild" value="{{i.id}}">{{i.name}}</option>
+				</select>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pan" style="overflow:auto">
+	<div class="list-main">
+		<table id="statistics">
+			<thead>
+				<tr>
+					<th rowspan="2">코드번호</th>
+					<th rowspan="2">종구분</th>
+					<th rowspan="2">세구분</th>
+					<th rowspan="2">제목</th>
+					<th rowspan="2" data-name="READED" class="desc">접속수</th>
+					<th colspan="2">다운로드 수</th>
+					<th rowspan="2" data-name="COMMENT">댓글 수</th>
+				</tr>
+				<tr>
+					<th data-name="HWP_DOWN">한글</th>
+					<th data-name="DOC_DOWN">워드</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td data-name="CODE_NO"></td>
+					<td data-name="TYPE_A"></td>
+					<td data-name="TYPE_B"></td>
+					<td data-name="TITLE" class="left"></td>
+					<td data-name="READED"></td>
+					<td data-name="HWP_DOWN"></td>
+					<td data-name="DOC_DOWN"></td>
+					<td data-name="COMMENT"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="waiting">
+	<div class="waiting-circle">
+		<svg class="waiting-circle" viewBox="25 25 50 50">
+	      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+	    </svg>
+    </div>
+	<div class="waiting-message"></div>
+</div>

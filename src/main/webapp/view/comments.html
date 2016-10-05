@@ -1,0 +1,41 @@
+<div class="header">
+	<div id="fn-buttons">
+		<a ng-click="comm.remove()" class="ti-minus" title="선택 답글 삭제"></a>
+	</div>
+</div>
+
+<div class="pan" style="overflow:auto">
+	<div class="list-main">
+		<table id="statistics">
+			<thead>
+				<tr>
+					<th data-define="CHECKBOX"></th>
+					<th>작성자</th>
+					<th>작성일시</th>
+					<th>구역</th>
+					<th>게시물</th>
+					<th>내용</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td data-define="CHECKBOX"></td>
+					<td data-name="NAME"></td>
+					<td data-name="UPDATED" class="date" data-format="yyyy-MM-dd HH:mm"></td>
+					<td data-name="SECTOR"></td>
+					<td data-name="TITLE" class="left"></td>
+					<td data-name="CONTENT" class="left pre"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="waiting">
+	<div class="waiting-circle">
+		<svg class="waiting-circle" viewBox="25 25 50 50">
+	      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+	    </svg>
+    </div>
+	<div class="waiting-message"></div>
+</div>

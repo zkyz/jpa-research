@@ -1,0 +1,6 @@
+#FileLock
+#Thu Oct 06 01:43:43 KST 2016
+hostName=192.168.25.31
+id=15795bab56461ebb0b4daa9b59a9d1d2b5978b540f8
+method=file
+server=192.168.25.31\:58799

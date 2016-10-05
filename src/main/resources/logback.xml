@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="300 seconds">
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+	
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+<!-- 	<logger name="org.springframework" level="INFO" /> -->
+<!-- 	<logger name="org.docx4j" level="INFO" /> -->
+
+	<if condition='isNull("jeus.home")'>
+		<then>
+			<logger name="kr.or.knia" level="TRACE" />
+			<root level="TRACE">
+				<appender-ref ref="console" />
+			</root>
+		</then>
+		<else>
+			<logger name="kr.or.knia" level="INFO" />
+			<root level="INFO">
+				<appender-ref ref="console" />
+			</root>
+		</else>
+	</if>
+</configuration>

@@ -1,0 +1,125 @@
+@charset "utf-8";
+
+.step {
+	list-style: none;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	z-index: 4;
+}
+.step>li {
+	background: #283d50;
+	border-radius: 3px;
+	color: #fff;
+	cursor: default;
+	float: left;
+	font-size: 16px;
+	height: 60px;
+	line-height: 60px;
+	margin-right: 10px;
+	padding: 0 40px;
+	position: relative;
+}
+@media(max-width: 1000px) {
+	.step>li {
+		padding: 0px 10px 0 30px
+	}
+}
+.step>li.active {
+	background: #14b5c8;
+	margin-top: 6px;
+}
+.step>li.active::after {
+	background: transparent;
+	border: 12px solid black;
+	border-color: transparent #14b5c8 #14b5c8 transparent;
+	content: "";
+	height: 5px;
+	bottom: -10px;
+	left: 50%;
+	margin-left: -12px;
+	position: absolute;
+	width: 5px;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+}
+
+.step-text {
+	font-size: 20px;
+	letter-spacing: -1px;
+	padding-left: 30px;
+}
+
+.step-number {
+	position: absolute;
+	left: 12px;
+	top: 0;
+	font-size: 90px;
+	font-weight: 700;
+	overflow: hidden;
+}
+
+.step-wizard {
+	background-color: #fff;
+	border-radius: 20px;
+	box-shadow: -1px -1px 10px #69b;
+	min-height: 650px;
+	position: relative;
+}
+.step-wizard:not(.rendered):before {
+	border: 4px solid #eee;
+	border-right: 4px solid #aaa;
+	border-radius: 50%;
+	content: " ";
+	display: inline-block;
+	height: 100px;
+	left: 50px;
+	position: relative;
+	top: 50px;
+	width: 100px;
+	-webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+@-moz-keyframes spin { 
+	100% {
+		-moz-transform: rotate(360deg);
+	}
+}
+@-webkit-keyframes spin { 
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+@
+keyframes spin { 
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+.step-wizard>* {
+	display: none;
+}
+
+.step-wizard>.step {
+	padding: 50px 50px 15px;
+}
+.step-wizard>.content {
+	position: relative;
+}
+
+.step-wizard>.content>section {
+	display: none;
+}
+.step-content {
+	clear: both;
+	display: none;
+	margin: 0 0 20px;
+	min-height: 100px;
+	padding: 0 50px 50px;
+	width: 100%;
+}
