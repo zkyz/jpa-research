@@ -12,7 +12,6 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -25,7 +24,6 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import kr.or.knia.config.spring.argument.UserArgumentResolver;
 import kr.or.knia.config.spring.converter.NumbersHttpMessageConverter;
 import kr.or.knia.config.spring.converter.ToDoubleConverter;
 import kr.or.knia.config.spring.converter.ToFloatConverter;
@@ -33,7 +31,6 @@ import kr.or.knia.config.spring.converter.ToIntegerConverter;
 import kr.or.knia.config.spring.converter.ToLongConverter;
 import kr.or.knia.config.spring.converter.ToNumberConverter;
 import kr.or.knia.config.spring.converter.ToShortConverter;
-import kr.or.knia.config.spring.converter.sessionwired.SessionWiredUserConverter;
 import kr.or.knia.config.spring.formatter.bool.TrueFormatAnnotationFormatterFactory;
 import kr.or.knia.config.spring.formatter.text.TextFormatAnnotationFormatterFactory;
 
@@ -78,14 +75,8 @@ public class DefaultWebAppConfiguration extends WebMvcConfigurerAdapter {
 		registry.addConverter(new ToDoubleConverter());
 		registry.addConverter(new ToFloatConverter());
 		registry.addConverter(new ToNumberConverter());
-		registry.addConverter(userConverter());
 		registry.addFormatterForFieldAnnotation(new TrueFormatAnnotationFormatterFactory());
 		registry.addFormatterForFieldAnnotation(new TextFormatAnnotationFormatterFactory());
-	}
-
-	@Bean
-	public SessionWiredUserConverter userConverter() {
-		return new SessionWiredUserConverter();
 	}
 
 //	@Override
@@ -104,11 +95,6 @@ public class DefaultWebAppConfiguration extends WebMvcConfigurerAdapter {
 //			}
 //		});
 //	}
-	
-	@Override
-	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		argumentResolvers.add(new UserArgumentResolver());
-	}
 	
 	@Override
 	public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
@@ -140,7 +126,7 @@ public class DefaultWebAppConfiguration extends WebMvcConfigurerAdapter {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/jsp/");
 		resolver.setSuffix(".jsp");
-		resolver.setOrder(Integer.MAX_VALUE);
+		resolver.setOrder(1);
 		return resolver;
 	}
 	

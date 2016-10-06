@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +21,7 @@ import javax.persistence.TemporalType;
 @Table(name = "USR")
 @SequenceGenerator(name="User-sequence", sequenceName = "SQ_USR_UID", allocationSize = 1)
 public class User {
+	public static final String SESS_NAME = User.class.getCanonicalName();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "User-sequence")
@@ -34,7 +36,7 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserStatus status;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "GRPCD")
 	private Group group;
 	

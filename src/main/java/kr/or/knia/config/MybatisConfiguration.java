@@ -54,7 +54,8 @@ public class MybatisConfiguration implements ResourceLoaderAware {
 		sqlSessionFactoryBean.setDataSource(dataSource);
 		sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
 		sqlSessionFactoryBean.setMapperLocations(mappers);
-		sqlSessionFactoryBean.setTypeAliasesPackage(basePackage);
+		//sqlSessionFactoryBean.setTypeAliasesPackage(basePackage);
+		
 
 		org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
 		config.setJdbcTypeForNull(JdbcType.VARCHAR);

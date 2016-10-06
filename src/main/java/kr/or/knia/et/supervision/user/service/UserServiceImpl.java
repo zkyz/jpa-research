@@ -1,34 +1,42 @@
 package kr.or.knia.et.supervision.user.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.knia.domain.User;
 import kr.or.knia.et.supervision.ListInquiry;
-import kr.or.knia.reply.system.user.dao.UserDao;
+import kr.or.knia.et.supervision.user.Group;
+import kr.or.knia.et.supervision.user.GroupRepository;
+import kr.or.knia.et.supervision.user.User;
+import kr.or.knia.et.supervision.user.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	private UserDao dao;
+	private UserRepository userRepo;
+	
+	@Autowired
+	private GroupRepository groupRepo;
+	
 	
 	public List<User> getUser(ListInquiry inquiry) {
-		return dao.getUser(inquiry);
+		List<User> list = userRepo.findAll();
+		return list;
 	}
 
 	public int save(User user) {
-		return dao.save(user);
+		userRepo.save(user);
+		return 1;
 	}
 
 	public int remove(User user) {
-		return dao.remove(user);
+		userRepo.delete(user);
+		return 1;
 	}
 
-	public List<Map<String, String>> getCorps() {
-		return dao.getCorps();
+	public List<Group> getGroups() {
+		return groupRepo.findAll();
 	}
 }

@@ -9,5 +9,8 @@
 	<entry key="application.base.package">kr.or.knia</entry>
 	<entry key="application.file.storage">/was_t_app/was_c_fs/reply</entry>
 
-   	<entry key="database.url">jdbc:oracle:thin:reply/reply$8500@172.100.30.22:1590:ORA11T</entry>
+    <entry key="application.db.driver">org.h2.Driver</entry>
+   	<entry key="application.db.url">jdbc:h2:tcp://localhost/~/git/jpa-research/db;AUTO_SERVER=TRUE;MODE=Oracle</entry>
+   	<entry key="application.db.username">sa</entry>
+   	<entry key="application.db.password"></entry>
 </properties>

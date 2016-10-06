@@ -11,13 +11,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DataSourceConfiguration {
-	@Value("${application.db.driver:org.h2.Driver}")
+	@Value("${application.db.driver:}")
 	private String driver;
 
-	@Value("${application.db.url:jdbc:h2:./db;AUTO_SERVER=TRUE;MODE=Oracle}")
+	@Value("${application.db.url:}")
 	private String url;
 
-	@Value("${application.db.username:sa}")
+	@Value("${application.db.username:}")
 	private String username;
 
 	@Value("${application.db.password:}")

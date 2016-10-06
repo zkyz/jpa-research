@@ -1,5 +1,7 @@
 package kr.or.knia.et.supervision.user;
 
+import java.util.List;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +33,7 @@ public class TestUserRepository {
 	@Autowired
 	private GroupRepository group;
 
-	@Test
+	//@Test
 	public void _1_그룹_생성() {
 		Integer maxOrder = group.getCurrentMaxOrder();
 		if(maxOrder == null) 
@@ -43,7 +45,7 @@ public class TestUserRepository {
 	}
 	
 	
-	@Test
+	//@Test
 	public void _2_유저_생성() {
 		Group g = group.findOne("N00");
 		
@@ -53,12 +55,14 @@ public class TestUserRepository {
 	}
 	
 	
-	//@Test
-//	public void _2_모든_유저_검색() {
-//		List<User> users = userRepo.findAll();
-//		
-//		for(User user : users) {
-//			System.out.println(user);
-//		}
-//	}
+	@Test
+	public void _3_모든_유저_검색() {
+		List<User> users = user.findAll();
+		
+		System.out.println("users.size() : " + users.size());
+		
+		for(User u : users) {
+			System.out.println(u);
+		}
+	}
 }

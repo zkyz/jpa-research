@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.or.knia.domain.User;
+import kr.or.knia.et.supervision.user.User;
 
 public class LoginCheckFilter implements Filter {
 
