@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import kr.or.knia.config.mybatis.page.Pageable;
+import kr.or.knia.config.mybatis.page.Paginate;
 
 public abstract class DaoSupport extends SqlSessionDaoSupport {
 
@@ -28,9 +28,9 @@ public abstract class DaoSupport extends SqlSessionDaoSupport {
 
 	public <T> T item(String queryId, Object param) {
 		T t = null;
-		if(!(param instanceof Pageable)) return getSqlSession().<T>selectOne(queryId, param);
+		if(!(param instanceof Paginate)) return getSqlSession().<T>selectOne(queryId, param);
 		else {
-			Pageable pagination = (Pageable)param;
+			Paginate pagination = (Paginate)param;
 			pagination.setEnabled(false);
 			t = getSqlSession().<T>selectOne(queryId, param);
 			pagination.setEnabled(true);

@@ -2,7 +2,7 @@ package kr.or.knia.config.mybatis.page;
 
 import java.util.List;
 
-public interface Pageable {
+public interface Paginate {
 	public int getPage();
 	public int getRowPerPage();
 	public int getPageCountPerList();

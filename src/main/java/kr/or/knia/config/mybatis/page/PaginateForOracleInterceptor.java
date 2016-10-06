@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 		@Signature(type = Executor.class, method = "query", args = {
 				MappedStatement.class, Object.class, RowBounds.class,
 				ResultHandler.class, CacheKey.class, BoundSql.class }) })
-public class PageableForOracleInterceptor implements Interceptor {
+public class PaginateForOracleInterceptor implements Interceptor {
 	private static final Logger log = LoggerFactory
 			.getLogger("--- mybatis execute ---");
 
@@ -40,8 +40,8 @@ public class PageableForOracleInterceptor implements Interceptor {
 
 		Executor executor = (Executor) invocation.getTarget();
 
-		if (param instanceof Pageable) {
-			Pageable pagination = (Pageable) param;
+		if (param instanceof Paginate) {
+			Paginate pagination = (Paginate) param;
 
 			if (pagination.isEnabled() && pagination.getPage() > 0) {
 				boolean isNumberResultType = false;
@@ -134,7 +134,7 @@ public class PageableForOracleInterceptor implements Interceptor {
 
 	private MappedStatement createNewMappedStatementForPagination(
 			MappedStatement ms, final BoundSql boundSql,
-			List<ResultMap> resultMap, Pageable pagination, Object param)
+			List<ResultMap> resultMap, Paginate pagination, Object param)
 			throws Exception {
 
 		final StringBuilder sql = new StringBuilder();

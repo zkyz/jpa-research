@@ -22,7 +22,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Repository;
 
 import kr.or.knia.config.mybatis.SQLLoggingInterceptor;
-import kr.or.knia.config.mybatis.page.PageableForOracleInterceptor;
+import kr.or.knia.config.mybatis.page.PaginateForOracleInterceptor;
 import kr.or.knia.config.mybatis.typehandler.FileTypeHandler;
 import kr.or.knia.config.mybatis.typehandler.YES2BooleanTypeHandler;
 
@@ -60,7 +60,7 @@ public class MybatisConfiguration implements ResourceLoaderAware {
 		config.setJdbcTypeForNull(JdbcType.VARCHAR);
 		config.setMapUnderscoreToCamelCase(true);
 		config.addInterceptor(new SQLLoggingInterceptor());
-		config.addInterceptor(new PageableForOracleInterceptor());
+		config.addInterceptor(new PaginateForOracleInterceptor());
 
 		TypeHandlerRegistry typeHandlerRegistry = config.getTypeHandlerRegistry();
 		typeHandlerRegistry.register(new YES2BooleanTypeHandler());

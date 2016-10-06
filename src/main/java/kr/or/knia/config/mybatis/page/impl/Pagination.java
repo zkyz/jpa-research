@@ -3,9 +3,9 @@ package kr.or.knia.config.mybatis.page.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.or.knia.config.mybatis.page.Pageable;
+import kr.or.knia.config.mybatis.page.Paginate;
 
-public class Pagination implements Pageable {
+public class Pagination implements Paginate {
 	private boolean enabled = true;
 	private int page = 0;
 	private int rowPerPage = 15;
