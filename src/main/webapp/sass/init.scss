@@ -1,0 +1,18 @@
+@function color-ground($transparent:1) {
+    @return rgba(250, 250, 250, $transparent);
+}
+@function color-red($transparent:1) {
+    @return rgba(200, 0, 0, $transparent);
+}
+@function color-blue($transparent:1) {
+    @return rgba(40, 150, 240, $transparent);
+}
+@function color-text($transparent:1) {
+    @return rgba(35, 35, 35, $transparent);
+}
+@function color-gray($transparent:1) {
+    @return rgba(152, 152, 152, $transparent);
+}
+@function color-active($transparent:1) {
+    @return rgba(240, 240, 240, $transparent);
+}

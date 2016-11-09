@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment><![CDATA[
+		사용자
+	]]></comment>
+
+	<entry key="NotEmpty.user.id">아이디를 입력해 주세요.</entry>
+	<entry key="NotEmpty.user.name">이름을 입력해 주세요.</entry>
+	<entry key="NotNull.user.enableSystem">사용할 시스템을 선택해주세요.</entry>
+	<entry key="NotEmpty.user.corpCode">현재 소속되어있는 회사(또는 기관)을 선택해주세요.</entry>
+	<entry key="NotEmpty.user.pin">비밀번호의 입력해 주세요.</entry>
+	<entry key="Size.user.pin">비밀번호의 길이는 {2}글자 이상이에요. 잘 입력해 주세요.</entry>
+	<entry key="NotNull.user.jobs">업무를 선택해주세요.</entry>
+	<entry key="Size.user.jobs">업무를 선택해주세요.</entry>
+	<entry key="AssertFalse.user.pin">비밀번호의 길이는 {2}글자 이상이에요. 잘 입력해 주세요.</entry>
+	<entry key="AssertFalse.user.pinHasNotAlphabet">비밀번호는 문자를 포함해야만 해요.</entry>
+	<entry key="AssertFalse.user.pinHasNotNumber">비밀번호는 숫자를 포함해야만 해요.</entry>
+	<entry key="AssertFalse.user.pinHasNotSpecialCharacter">비밀번호는 특수문자를 포함해야만 해요.</entry>
+	<entry key="AssertFalse.user.pinRepeatSameCharacters">비밀번호에 한가지 문자를 반복해서 여러번 사용할 수 없어요.</entry>
+	<entry key="AssertFalse.user.pinContainsId">비밀번호에 아이디를 포함해서 사용할 수 없어요.</entry>
+	<entry key="AssertFalse.user.pinSequencialCharacters">비밀번호에 순차적인 문자를 쓸수없어요. (예: 1234, abcd)</entry>
+	<entry key="AssertFalse.user.pinContainsWeakWords">비밀번호로 자주 쓰이는 단어는 포함할 수 없어요.</entry>
+
+	<entry key="login.deny.anonymous">확인되는 사용자가 아닌것 같아요. 정확히 입력하셨나요?</entry>
+	<entry key="login.deny.locked">비밀번호를 너무 많이 틀려서 잠금 상태가 되었어요. 관리자에 문의해 주세요.</entry>
+	<entry key="login.deny.enable-system">사용할 수 없는 시스템을 선택했군요. 다른 시스템을 선택해 주세요.</entry>
+	<entry key="login.deny.not-approved">아직 승인되지 않았어요. 승인 후 사용할 수 있어요.</entry>
+	<entry key="login.deny.sleep">사용하지 않는 계정이라서 잠금 상태가 되었어요. 관리자에게 문의해 주세요.</entry>
+	<entry key="login.deny.fusty-pin">비밀번호를 바꾼지 오래되었네요. 바꾸셔야만 해요.</entry>
+</properties>

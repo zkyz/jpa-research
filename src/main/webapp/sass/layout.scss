@@ -1,0 +1,228 @@
+@import "init.scss";
+
+body > div:first-child {
+    background-color: color-ground();
+    height: 100%;
+    overflow: auto;
+    position: absolute;
+    width: 100%;
+}
+
+#위쪽 {
+    background-color: color-ground();
+    height: 60px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    visibility: hidden;
+    width: 100%;
+    z-index: 1;
+
+    > ul {
+        list-style: none;
+        padding: 0 20px;
+        margin: 10px 0;
+
+        > li {
+            float: left;
+        }
+    }
+
+    .menu-handle {
+        border-radius: 50%;
+        height: 40px;
+        padding: 14px 10px;
+        width: 40px;
+
+        > div {
+            background-color: color-blue();
+            height: 2px;
+            margin-bottom: 3px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .system-title {
+        color: color-blue();
+        font-size: 18px;
+        line-height: 40px;
+    }
+}
+#차림 {
+    font-size: 14px;
+    left: 0;
+    position: absolute;
+    top: 60px;
+    transition: all;
+    transition-duration: .7s;
+    width: 280px;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        > li {
+            &:first-child > a {
+                padding: 14px 35px 8px 55px;
+            }
+            &:last-child > a {
+                padding: 8px 35px 14px 55px;
+            }
+
+            > a {
+                color: color-gray();
+                display: block;
+                padding: 8px 35px 8px 55px;
+                position: relative;
+
+                &.active,
+                &:hover {
+                    color: color-text();
+                }
+
+                &[href='']::after {
+                    content: "\f278"; // + simbol
+                    font-family: "Material-Design-Iconic-Font";
+                    font-size: 17px;
+                    position: absolute;
+                    right: 25px;
+                    top: 25%;
+                    transition: all;
+                    transition-duration: 250ms;
+                }
+
+                &[href=''].open::after {
+                    content: "\f273"; // - simbol
+                }
+
+                > i {
+                    left: 25px;
+                    font-size: 18px;
+                    position: absolute;
+                }
+            }
+            > ul {
+                display: none;
+            }
+        }
+    }
+
+    > ul {
+        margin: 20px 0;
+
+        > li > a {
+            color: color-text() !important;
+            font-weight: 500 !important;
+            padding: 14px 35px 14px 55px !important;
+
+            &.active,
+            &:hover {
+                background-color: color-active();
+            }
+        }
+    }
+
+    a {
+        transition: color;
+        transition-duration: .3s;
+    }
+}
+
+#틀 {
+    left: 290px;
+    padding: 0 20px;
+    position: absolute;
+    top: 70px;
+    transition: all;
+    transition-duration: .3s;
+    width: calc(100% - 290px);
+
+    h2 {
+        color: #777;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0 0 25px 0;
+        padding: 0 10px;
+        text-transform: uppercase;
+    }
+}
+
+.completed {
+    #위쪽,
+    #틀,
+    #차림 {
+        visibility: visible;
+    }
+
+    #기다림 {
+        display: none;
+    }
+}
+
+
+#기다림 {
+    background-color: #fff;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+
+    > span {
+        display: block;
+        text-align: center;
+    }
+    > div {
+        height: 100px;
+        margin: 0 auto;
+        position: relative;
+        width: 100px;
+
+        > svg {
+            animation: rotate 2s linear infinite;
+            height: 100%;
+            transform-origin: center center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+
+            > circle {
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+                animation: dash 1.5s ease-in-out infinite;
+                stroke-linecap: round;
+                stroke: color-blue();
+            }
+        }
+    }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
