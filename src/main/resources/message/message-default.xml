@@ -4,9 +4,17 @@
 	<comment><![CDATA[
 		기본 메세지
 	]]></comment>
+
+	<entry key="UNKNOWN">오류가 발생하였습니다. 관리자에게 문의 바랍니다.</entry>
 	
-	<entry key="default.do">{0} 하시겠습니까?</entry>
-	<entry key="default.did">{0} 하였습니다.</entry>
-	<entry key="default.success">성공하였습니다.</entry>
-	<entry key="default.failure">실패하였습니다.</entry>
+	<entry key="NotEmpty">내용을 입력해주세요.</entry>
+	<entry key="NotNull">필수 데이터 입니다.</entry>
+	<entry key="Size">{2} 에서 {1} 까지 글자 수 또는 선택이 제한됩니다.</entry>
+	<entry key="AssertTrue">정상적인 값이 아닌것 같네요. 다시 확인해 주세요.</entry>
+	<entry key="AssertFalse">정상적인 값이 아닌것 같네요. 다시 확인해 주세요.</entry>
+	
+	<entry key="do?">{0}하시겠습니까?</entry>
+	<entry key="did">{0}하였습니다.</entry>
+	<entry key="success">{0}성공하였습니다.</entry>
+	<entry key="failure">{0}실패하였습니다.</entry>
 </properties>

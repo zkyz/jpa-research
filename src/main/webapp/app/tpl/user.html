@@ -1,123 +1,117 @@
-<div class="header">
-	<label class="search-category input-group">
-		<i class="ti-search input-group-addon"></i>
-		<input type="text" id="search-keyword" ng-model="inquiry.keyword" class="keyword" placeholder="검색">
-	</label>
-	<div id="fn-buttons">
-		<a ng-click="comm.add()" class="ti-plus" title="새로운 회원 추가">[[ {{name}} ]]</a>
-	</div>
-</div>
+<h2>사용자등록관리</h2>
 
-<div class="pan">
-	<div class="search-types">
-		<ul id="search-type">
-			<li data-search-by="ID">아이디</li>
-			<li data-search-by="NAME">이름</li>
-			<li data-search-by="GROUP">회사</li>
-			<li data-search-by="ALL" class="active">모두</li>
-		</ul>
-	</div>
-	<div class="list-info">
-		<div class="row-count">모두 <span id="rowCount">0</span>개</div>
-		<div class="list-order dropdown">
-			<a data-toggle="dropdown">
-				<span id="order-by">아이디 순서</span>
-				<span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu dropdown-menu-right">
-				<li><a data-order-by="ID"><i class="empty"></i> 아이디 순서</a></li>
-				<li><a data-order-by="NAME"><i class="empty"></i> 이름 순서</a></li>
-				<li class="divider"></li>
-				<li><a data-order-method="DESC"><i class="empty"></i> 내림차순</a></li>
-				<li><a data-order-method="ASC" ><i class="ti-check"></i> 오름차순</a></li>
-			</ul>
+<div class="card">
+	<header>
+		<h3>사용자 목록</h3>
+		<div class="actions">
+			<a href="" data-tooltip="조회"><i class="zmdi zmdi-search"></i></a>
+			<a href="" data-tooltip="등록"><i class="zmdi zmdi-plus"></i></a>
+			<a href="" data-tooltip="삭제"><i class="zmdi zmdi-minus"></i></a>
 		</div>
-	</div>
-	
-	<div class="list-main">
-		<table id="user">
-			<thead>
-				<tr>
-					<th>순번</th>
-					<th>ID</th>
-					<th>이름</th>
-					<th>회사</th>
-					<th>분류</th>
-					<th>상태</th>
-					<th>요청</th>
-					<th>승인</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td data-define="ROWNUM"></td>
-					<td data-name="id"></td>
-					<td data-name="name"></td>
-					<td data-name="groupName"></td>
-					<td>관리자</td>
-					<td>승인</td>
-					<td>2016-10-04 09:24</td>
-					<td>2016-10-04 09:43</td>
-				</tr>
-			</tbody>
-		</table>
-		
-		<div class="panel-area">
-			<form class="panel clearfix">
-				<table class="table-border">
-					<colgroup>
-						<col width="10%">
-						<col width="20%">
-						<col width="10%">
-						<col width="20%">
-						<col width="10%">
-						<col width="30%">
-					</colgroup>
-					<tr>
-						<th>아이디</th>
-						<td><input type="text" name="id"></td>
-						<th>이름</th>
-						<td><input type="text" name="name"></td>
-						<th><div class="grade-A">회사</div></th>
-						<td>
-							<div class="grade-A">
-								<select name="group">
-									<option value=""></option>
-									<option ng-repeat="i in corps" value="{{i.CD}}">{{i.NAME}}</option>
-								</select>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th>휴대전화</th>
-						<td><input type="text" name="mobile"></td>
-						<th>비밀번호</th>
-						<td><input type="password" name="pin"></td>
-						<td></td>
-						<td>
-							<div class="grade-A">
-								<input type="checkbox" name="grade" value="B"> 회원사 관리자
-							</div>
-						</td>
-					</tr>
-				</table>
-				<div style="float:right">
-					<div class="btn-group">
-						<button class="btn btn-default">저장</button>
-						<button class="btn btn-default">승인</button>
-					</div>
-					<button ng-click="remove()" type="button" class="btn btn-sm btn-danger">삭제</button>
+		<form class="form-inline">
+			<div class="form-group">
+				<div class="input-group input-line">
+					<div class="input-group-addon">업무코드</div>
+      				<input type="text" class="form-control">
+      			</div>
+      		</div>
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">회원사</div>
+					<select class="form-control chosen">
+						<option value=""></option>
+						<option value="N00">손해보험협회</option>
+						<option value="N01">메리츠손해보험주식회사</option>
+					</select>
 				</div>
-			</form>
-		</div>
+			</div>
+			<div class="form-group">
+				<div class="input-group input-line">
+					<div class="input-group-addon">ID</div>
+					<input type="text" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="input-group input-line">
+					<div class="input-group-addon">이름</div>
+					<input type="text" class="form-control">
+				</div>
+			</div>
+		</form>
+	</header>
+	<table class="table table-bordered">
+		<colgroup>
+			<col width="45">
+		</colgroup>
+		<thead>
+			<tr>
+				<th><input type="checkbox" class="checkbox"></th>
+				<th>ID</th>
+				<th>이름</th>
+				<th>회사</th>
+				<th>종류</th>
+				<th>상태</th>
+				<th>요청일</th>
+				<th>승인일</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="checkbox" class="checkbox"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="row">
+	<div class="col-sm-6 col-md-3">
+
 	</div>
 </div>
 
-<div class="waiting">
-	<div class="waiting-circle">
-		<svg class="waiting-circle" viewBox="25 25 50 50">
-	      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
-	    </svg>
+
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+                <h4 class="modal-title">등록(또는 수정)</h4>
+            </div>
+            <div class="modal-body">
+            	<form novalidate>
+            		<div class="form-group row">
+        				<label class="col-xs-2 col-form-label required">ID</label>
+            			<div class="col-xs-10">
+            				<div class="input-group input-line">
+            					<input type="text" class="form-control" required name="id">
+            				</div>
+						</div>
+            		</div>
+            		<div class="form-group row">
+        				<label class="col-xs-2 col-form-label required">이름</label>
+            			<div class="col-xs-10">
+            				<div class="input-group input-line">
+            					<input type="text" class="form-control" required name="name">
+            				</div>
+						</div>
+            		</div>
+            		<div class="form-group row">
+        				<label class="col-xs-2 col-form-label required">회사</label>
+            			<div class="col-xs-10">
+							<select class="form-control chosen">
+								<option value=""></option>
+								<option value="N00">손해보험협회</option>
+								<option value="N01">메리츠손해보험주식회사</option>
+							</select>
+						</div>
+            		</div>
+            	</form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary wave">저장</button>
+            </div>
+        </div>
     </div>
-	<div class="waiting-message"></div>
 </div>

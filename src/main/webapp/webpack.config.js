@@ -1,25 +1,25 @@
-var webpack = require("webpack");
+const webpack = require("webpack");
 
 module.exports = {
+	entry: [
+		"./app/js/app.js"
+	],
 	devServer: {
 		inline: true,
 		port: 8880
 	},
-	entry: './app/js/app.js',
 	output: {
-		path: __dirname,
 		filename: "./app/js/app.bundle.js"
 	},
 	module: {
 		loaders: [
-			/* jQuery */
-			{
-				test: /\/angular\.js$/,
-				loader: 'imports?jQuery=jquery'
-			}, {
-				test: /\/jquery.js$/,
-				loader: 'expose?jQuery'
-			},
+			{ test: /jquery\.js$/, loader: "expose?jQuery" },
+			{ test: /tether\.js$/, loader: "expose?Tether" },
+			{ test: /bootstrap\.min\.js$/, loader: "imports?jQuery=jquery" },
+			{ test: /angular\.js$/, loader: "imports?jQuery=jquery" },
+			{ test: /(woff2?|svg|jpe?g|png|gif|ico)$/, loader: "url?limit=10000" },
+			{ test: /(ttf|eot)$/, loader: "file" },
+			{ test: /html$/, loader: "html" },
 			/* ES6 */
 			{
 				test: /\.js$/,
@@ -27,16 +27,21 @@ module.exports = {
 				query: {
 					presets: ['es2015']
 				},
-				exclude: /node_modules/
+				exclude: [/node_modules/]
 			},
 			/* sass */
 			{
-				test: /\.scss$/,
-				loader: "style!css!sass"
+				test: /\.scss$/, 
+				loader: 'style!css!sass'
 			}
 		]
 	},
 	plugins: [
+		new webpack.ProvidePlugin({
+			"$": "jquery",
+			"window.jQuery": "jquery",
+			"window.Tether": "tether"
+		})
 		/*new webpack.optimize.UglifyJsPlugin({
 			compress: { 
 				warnings: false

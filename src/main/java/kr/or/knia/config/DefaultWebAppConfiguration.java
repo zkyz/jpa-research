@@ -6,15 +6,17 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.data.web.SortHandlerMethodArgumentResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -22,15 +24,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import kr.or.knia.config.spring.converter.NumbersHttpMessageConverter;
-import kr.or.knia.config.spring.converter.ToDoubleConverter;
-import kr.or.knia.config.spring.converter.ToFloatConverter;
-import kr.or.knia.config.spring.converter.ToIntegerConverter;
-import kr.or.knia.config.spring.converter.ToLongConverter;
-import kr.or.knia.config.spring.converter.ToNumberConverter;
-import kr.or.knia.config.spring.converter.ToShortConverter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kr.or.knia.cns.domain.Code;
+import kr.or.knia.cns.domain.User;
+import kr.or.knia.config.spring.converter.CodeParamConvert;
+import kr.or.knia.config.spring.converter.UserIdParamConvert;
 import kr.or.knia.config.spring.formatter.bool.TrueFormatAnnotationFormatterFactory;
 import kr.or.knia.config.spring.formatter.text.TextFormatAnnotationFormatterFactory;
 
@@ -45,82 +45,64 @@ import kr.or.knia.config.spring.formatter.text.TextFormatAnnotationFormatterFact
 @EnableScheduling
 //@EnableAsync
 public class DefaultWebAppConfiguration extends WebMvcConfigurerAdapter {
-	
+
 	@Value("${multipart.max.size:10240000}") // 1024 * 10 (10MB) 
 	private long multipartMaxSize;
-	
+
+	String discrimination = System.getProperty("jeus.home");
+	boolean dev = "true".equalsIgnoreCase(System.getProperty("dev"));
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/**").addResourceLocations("/");
 		registry.addResourceHandler("/favicon.ico").addResourceLocations("/img/favicon.ico");
 	}
-	
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeInterceptor());
 	}
-	
+
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		Jackson2ObjectMapperBuilder mapperBuilder = new Jackson2ObjectMapperBuilder();
-		converters.add(new NumbersHttpMessageConverter());
-		converters.add(new MappingJackson2HttpMessageConverter(mapperBuilder.build()));
+		converters.add(jsonMessageConverter());
 	}
-	
+
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+		argumentResolvers.add(new SortHandlerMethodArgumentResolver());
+		argumentResolvers.add(new PageableHandlerMethodArgumentResolver());		
+	}
+
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
-		registry.addConverter(new ToIntegerConverter());
-		registry.addConverter(new ToLongConverter());
-		registry.addConverter(new ToShortConverter());
-		registry.addConverter(new ToDoubleConverter());
-		registry.addConverter(new ToFloatConverter());
-		registry.addConverter(new ToNumberConverter());
+		registry.addConverter(codeParamConverter());
+		registry.addConverter(userIdParamConverter());
 		registry.addFormatterForFieldAnnotation(new TrueFormatAnnotationFormatterFactory());
 		registry.addFormatterForFieldAnnotation(new TextFormatAnnotationFormatterFactory());
 	}
 
-//	@Override
-//	public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> returnValueHandlers) {
-//		returnValueHandlers.add(new HandlerMethodReturnValueHandler() {
-//			@Override
-//			public boolean supportsReturnType(MethodParameter returnType) {
-//				return List.class.isAssignableFrom(returnType.getParameterType());
-//			}
-//			
-//			@Override
-//			public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer,
-//					NativeWebRequest webRequest) throws Exception {
-//				HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
-//				objectMapper().getObject().writeValue(response.getOutputStream(), returnValue);
-//			}
-//		});
-//	}
-	
-	@Override
-	public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
-	}
-	
 	@Bean
-	public MappingJackson2JsonView jsonView() {
-		MappingJackson2JsonView view = new MappingJackson2JsonView();
-		view.setObjectMapper(objectMapper().getObject());
-		return view;
+	public MappingJackson2HttpMessageConverter jsonMessageConverter() {
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+		converter.setObjectMapper(objectMapper());
+		return converter;
 	}
 
 	@Bean
-	public Jackson2ObjectMapperFactoryBean objectMapper() {
-		Jackson2ObjectMapperFactoryBean factory = new Jackson2ObjectMapperFactoryBean();
-		factory.setFailOnEmptyBeans(false);
-		return factory;
+	public ObjectMapper objectMapper() {
+		return Jackson2ObjectMapperBuilder.json()
+				.indentOutput(discrimination == null || dev)
+				.build();
 	}
-	
+
 	@Bean
 	public MultipartResolver multipartResolver() {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		resolver.setMaxUploadSize(multipartMaxSize);
 		return resolver;
 	}
-	
+
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -129,7 +111,7 @@ public class DefaultWebAppConfiguration extends WebMvcConfigurerAdapter {
 		resolver.setOrder(1);
 		return resolver;
 	}
-	
+
 	@Bean
 	public SessionLocaleResolver localeResolver() {
 		SessionLocaleResolver resolver = new SessionLocaleResolver();
@@ -142,5 +124,15 @@ public class DefaultWebAppConfiguration extends WebMvcConfigurerAdapter {
 		LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
 		interceptor.setParamName("lang");
 		return interceptor;
+	}
+
+	@Bean
+	public Converter<String, Code> codeParamConverter() {
+		return new CodeParamConvert();
+	}
+
+	@Bean
+	public Converter<String, User> userIdParamConverter() {
+		return new UserIdParamConvert();
 	}
 }
